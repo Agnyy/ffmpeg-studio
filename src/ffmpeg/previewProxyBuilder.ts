@@ -1,0 +1,28 @@
+export function buildPreviewProxyArgs(inputPath: string, outputPath: string): string[] {
+  return [
+    "-y",
+    "-i",
+    inputPath,
+    "-map",
+    "0:v:0",
+    "-map",
+    "0:a?",
+    "-vf",
+    "scale='min(1280,iw)':-2,format=yuv420p",
+    "-c:v",
+    "libx264",
+    "-pix_fmt",
+    "yuv420p",
+    "-preset",
+    "veryfast",
+    "-crf",
+    "23",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "128k",
+    "-movflags",
+    "+faststart",
+    outputPath,
+  ];
+}

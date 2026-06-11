@@ -1,0 +1,6 @@
+# Place platform-specific FFmpeg binaries here for production builds.
+#
+# Windows: ffmpeg.exe, ffprobe.exe
+# macOS/Linux: ffmpeg, ffprobe
+#
+# These files are bundled into the app via electron-builder extraResources.

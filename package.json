@@ -1,0 +1,43 @@
+{
+  "name": "ffmpeg-studio",
+  "version": "0.1.0",
+  "description": "Electron desktop video editor prototype with FFmpeg preview engine and render pipeline",
+  "main": "dist-electron/main.js",
+  "author": "FFmpeg Studio Contributors",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "build:bundle": "vite build",
+    "build": "npm run typecheck && npm run build:bundle",
+    "check": "node scripts/check.mjs",
+    "dist": "npm run build && electron-builder --config electron-builder.json --win",
+    "dist:portable": "npm run build && electron-builder --config electron-builder.json --win portable",
+    "dist:installer": "npm run build && electron-builder --config electron-builder.json --win nsis",
+    "preview": "vite preview",
+    "preview:selftest": "tsx scripts/preview-selftest/runPreviewSelftest.ts",
+    "preview:crash-test": "tsx scripts/preview-crash-test/runPreviewCrashTest.ts",
+    "preview:crash-test:light": "tsx scripts/preview-crash-test/runPreviewCrashTest.ts --light"
+  },
+  "dependencies": {
+    "ffmpeg-ffprobe-static": "^6.1.1",
+    "lucide-react": "^1.17.0",
+    "node-av": "^6.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "tsx": "^4.22.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vite-plugin-electron": "^0.28.8",
+    "vite-plugin-electron-renderer": "^0.14.6"
+  }
+}

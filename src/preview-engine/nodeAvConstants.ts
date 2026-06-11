@@ -1,0 +1,3 @@
+export const AV_NOPTS_VALUE = -9223372036854775808n;
+export const AVSEEK_FLAG_BACKWARD = 1;
+export const GLOBAL_SEEK_STREAM_INDEX = -1;
