@@ -10,3 +10,6 @@ coverage/
 *.log
 .DS_Store
 Thumbs.db
+
+# Editor / AI assistant local config
+.cursor/
