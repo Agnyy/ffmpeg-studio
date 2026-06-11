@@ -125,13 +125,6 @@ Both `ffmpeg` and `ffprobe` are verified with `-version` before use.
 - Old preview/proxy infrastructure may still exist internally
 - Project is under active development — APIs and UI will change
 
-## Documentation
-
-- [GITHUB_RELEASE_CHECKLIST.md](GITHUB_RELEASE_CHECKLIST.md) — manual checks before publishing
-- [REGRESSION_CHECKLIST.md](REGRESSION_CHECKLIST.md) — detailed regression scenarios
-- [DEV_NOTES.md](DEV_NOTES.md) — contributor architecture notes
-- [PROJECT_CLEANUP_AUDIT.md](PROJECT_CLEANUP_AUDIT.md) — cleanup audit (Phase 1)
-
 ## License
 
 FFmpeg Studio is licensed under [GNU General Public License v3.0 or later](LICENSE).
@@ -140,4 +133,4 @@ FFmpeg Studio is licensed under [GNU General Public License v3.0 or later](LICEN
 
 FFmpeg is a trademark of Fabrice Bellard. FFmpeg Studio is an unofficial GUI project.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party components.
+See [docs/legal/THIRD_PARTY_NOTICES.md](docs/legal/THIRD_PARTY_NOTICES.md) for third-party components.
