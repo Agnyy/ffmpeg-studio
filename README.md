@@ -12,6 +12,36 @@ A desktop studio for importing footage, editing on a timeline, previewing with a
 
 Features and APIs change frequently. Expect rough edges, incomplete workflows, and regressions until manual release checks are done.
 
+## First public revision
+
+This repository is the first public revision of FFmpeg Studio.
+
+The goal of this release is to show the direction of the project: a desktop video editor with a custom FFmpeg-based preview engine, timeline editing, audio playback, and export pipeline.
+
+It is not a finished product yet. If the project gets interest from users, I plan to continue improving it as a hobby/open-source project and focus on the features people actually need.
+
+## Screenshots
+
+### Main editor
+
+![Main editor](docs/screenshots/main-window.png)
+
+### Timeline preview
+
+![Timeline preview](docs/screenshots/timeline_1.png)
+
+### Preview cache / progress ranges
+
+![Preview cache ranges](docs/screenshots/progress.png)
+
+### Effects and presets
+
+![Effects and presets](docs/screenshots/effects.png)
+
+### Timeline editing
+
+![Timeline editing](docs/screenshots/timeline_2.png)
+
 ## Current features
 
 - Import video (drag-and-drop or file picker)
@@ -124,6 +154,30 @@ Both `ffmpeg` and `ffprobe` are verified with `-version` before use.
 - Audio/video sync may need more testing on different files
 - Old preview/proxy infrastructure may still exist internally
 - Project is under active development — APIs and UI will change
+
+## Possible next features
+
+- More stable export presets
+- Better audio/video sync tools
+- More FFmpeg filter UI controls
+- Timeline editing improvements
+- Preview performance improvements
+- Project save/load polishing
+- User-requested workflows
+
+## Support development
+
+FFmpeg Studio is currently developed as a personal open-source prototype.
+
+If you find the project interesting, you can support it by:
+
+- starring the repository
+- sharing feedback or bug reports
+- suggesting useful editing features
+- testing the app with different video files
+- supporting future development through donations or sponsorship links when available
+
+Support and interest will help decide whether this project continues as a long-term hobby project and which features should be prioritized next.
 
 ## License
 
