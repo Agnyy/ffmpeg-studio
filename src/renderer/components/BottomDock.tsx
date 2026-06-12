@@ -102,6 +102,7 @@ type BottomDockProps = {
   commandPreview: string;
   commandPreviewNote: string;
   logLines: string[];
+  onClearLogs?: () => void;
 };
 
 export default function BottomDock({
@@ -165,6 +166,7 @@ export default function BottomDock({
   commandPreview,
   commandPreviewNote,
   logLines,
+  onClearLogs,
 }: BottomDockProps) {
   const compositionTabs = compositions.filter((item) => item.type === "composition");
   const showTimeline = Boolean(activeCompositionId);
@@ -289,7 +291,7 @@ export default function BottomDock({
         {activeTab === "command" && (
           <CommandPreview command={commandPreview} note={commandPreviewNote} />
         )}
-        {activeTab === "logs" && <LogPanel lines={logLines} />}
+        {activeTab === "logs" && <LogPanel lines={logLines} onClear={onClearLogs} />}
       </div>
     </section>
   );

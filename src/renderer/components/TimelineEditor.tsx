@@ -1714,7 +1714,7 @@ function TimelineEditor({
             type="button"
             className={`timeline-mode-btn ${viewMode === "layer" ? "active" : ""}`}
             onClick={() => onViewModeChange?.("layer")}
-            title="Layer Mode (After Effects style)"
+            title="Layer stack view"
           >
             <Layers size={12} /> Layer
           </button>
@@ -1722,7 +1722,7 @@ function TimelineEditor({
             type="button"
             className={`timeline-mode-btn ${viewMode === "tracks" ? "active" : ""}`}
             onClick={() => onViewModeChange?.("tracks")}
-            title="Tracks Mode (NLE style)"
+            title="Tracks view"
           >
             <Film size={12} /> Tracks
           </button>

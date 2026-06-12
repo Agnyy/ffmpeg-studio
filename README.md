@@ -1,14 +1,16 @@
 # FFmpeg Studio
 
-**This is an active prototype / work-in-progress editor.** It is not production-stable.
+**This is an active prototype / work-in-progress.** It is not production-stable.
 
-FFmpeg Studio is an unofficial open-source desktop video editor built on Electron, React, and FFmpeg (via [node-av](https://www.npmjs.com/package/node-av)).
+FFmpeg Studio is an unofficial open-source **visual FFmpeg editor** for filters, preview, timeline organization, and rendering — built on Electron, React, and FFmpeg (via [node-av](https://www.npmjs.com/package/node-av)).
+
+This is **not** an After Effects / Premiere replacement. It is a visual FFmpeg-based workflow for applying filters, previewing footage, organizing layers on a timeline, and exporting through FFmpeg.
 
 This project is **not affiliated with or endorsed by** the FFmpeg project.
 
 ## What it is
 
-A desktop studio for importing footage, editing on a timeline, previewing with a native FFmpeg decode engine, and exporting renders through FFmpeg job queues.
+A desktop studio for filter-based video processing: import footage, browse FFmpeg filters, preview with a native decode engine, organize layers on a timeline, and render through FFmpeg job queues.
 
 Features and APIs change frequently. Expect rough edges, incomplete workflows, and regressions until manual release checks are done.
 
@@ -16,7 +18,7 @@ Features and APIs change frequently. Expect rough edges, incomplete workflows, a
 
 This repository is the first public revision of FFmpeg Studio.
 
-The goal of this release is to show the direction of the project: a desktop video editor with a custom FFmpeg-based preview engine, timeline editing, audio playback, and export pipeline.
+The goal is to show the direction of the project: a visual FFmpeg editor with filter presets, preview, layer stack timeline, audio playback, and an FFmpeg render pipeline.
 
 It is not a finished product yet. If the project gets interest from users, I plan to continue improving it as a hobby/open-source project and focus on the features people actually need.
 
@@ -66,11 +68,16 @@ It is not a finished product yet. If the project gets interest from users, I pla
 
 ## Requirements
 
-- Node.js 18+
-- npm
-- Windows (primary target; other platforms may work with setup changes)
+- **Windows 10/11 (64-bit)** recommended for packaged builds
+- Node.js 18+ and npm (for development / building from source)
 
-## Install
+## Download
+
+The easiest way to try FFmpeg Studio is to download the latest Windows build from the GitHub Releases page.
+
+Windows 10/11 64-bit is recommended.
+
+## Install (from source)
 
 ```bash
 npm install
@@ -94,7 +101,13 @@ Typecheck and production bundle:
 npm run check
 ```
 
-## Build
+## Build (from source)
+
+Packaging copies FFmpeg from the `ffmpeg-ffprobe-static` npm package into `resources/bin/` automatically:
+
+```bash
+npm run prepare:ffmpeg-bin
+```
 
 ```bash
 npm run build
@@ -109,6 +122,12 @@ npm run dist:installer    # NSIS installer only
 ```
 
 Output appears in `release/`.
+
+### Publish a release
+
+1. Run `npm run dist` (or `dist:portable` / `dist:installer`).
+2. On GitHub: **Releases → Draft a new release** → attach artifacts from `release/` (portable `.exe`, installer).
+3. Do not commit `release/` artifacts to git.
 
 ## Preview regression tests
 

@@ -939,6 +939,15 @@ button {
   min-width: 0;
 }
 
+.effects-presets-layer-hint {
+  margin: 0;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
 .effects-presets-options {
   position: relative;
   flex-shrink: 0;
@@ -1423,10 +1432,10 @@ button {
 }
 
 .effect-preset-row-info-btn,
-.effect-preset-row-add-btn {
+.effect-preset-row-add-btn,
+.effect-preset-row-apply-btn {
   display: grid;
   place-items: center;
-  width: 20px;
   height: 20px;
   padding: 0;
   border: 1px solid transparent;
@@ -1434,6 +1443,26 @@ button {
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
+}
+
+.effect-preset-row-info-btn {
+  width: 20px;
+}
+
+.effect-preset-row-apply-btn {
+  min-width: 20px;
+  width: auto;
+  padding: 0 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  border-color: var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.effect-preset-row-apply-btn:hover {
+  border-color: var(--accent);
+  background: rgba(79, 140, 255, 0.12);
 }
 
 .effect-preset-row-info-btn:hover,
@@ -1806,6 +1835,19 @@ button {
 
 .export-panel-path {
   font-size: 10px;
+}
+
+.export-panel-row-stack .export-panel-value {
+  display: block;
+  margin-top: 2px;
+  text-align: left;
+}
+
+.export-panel-output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
 }
 
 .export-panel-warning {
@@ -2601,6 +2643,26 @@ button {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.log-block-toolbar,
+.command-preview-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.command-preview-toolbar .command-preview-note {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.log-block-toolbar {
+  justify-content: flex-end;
 }
 
 .command-preview-note {

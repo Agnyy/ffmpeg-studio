@@ -124,7 +124,9 @@ export function compactRecipeBadges(
           "This FFmpeg filter is not available in your current FFmpeg build."
         : kind === "fallback"
           ? plan.fallbackNote
-          : undefined,
+          : kind === "render-only"
+            ? "Applied during render; live preview may not show this filter."
+            : undefined,
   }));
 
   return {
@@ -147,6 +149,10 @@ function partitionCompactBadges(raw: EffectBadgeKind[]): {
   const sorted = EFFECT_BADGE_PRIORITY.filter((kind) => raw.includes(kind)).map((kind) => ({
     kind: kind as CompactBadge["kind"],
     label: badgeShortLabel(kind as CompactBadge["kind"]),
+    title:
+      kind === "render-only"
+        ? "Applied during render; live preview may not show this filter."
+        : undefined,
   }));
   return {
     visible: sorted.slice(0, 2),
@@ -163,7 +169,7 @@ export function badgeShortLabel(kind: CompactBadge["kind"]): string {
     case "analyze":
       return "ANALYZE";
     case "render-only":
-      return "RENDER";
+      return "Render-only";
     case "preview":
       return "PREVIEW";
   }

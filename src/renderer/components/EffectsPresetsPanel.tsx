@@ -600,6 +600,10 @@ function EffectsPresetsPanel({
         </div>
       </div>
 
+      {!selectedLayer && !filtersPreparing && (
+        <p className="effects-presets-layer-hint">Select a layer to apply filters.</p>
+      )}
+
       <div className="effects-presets-tree-wrap">
         {(filtersPreparing || ffmpegError) && (
           <StartupPreparingBanner

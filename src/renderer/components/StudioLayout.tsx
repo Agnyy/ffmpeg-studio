@@ -81,6 +81,7 @@ type StudioLayoutProps = {
   commandPreview: string;
   commandPreviewNote: string;
   logLines: string[];
+  onClearLogs?: () => void;
   bottomTab: BottomTab;
   settingsOpen: boolean;
   seekTime: number | null;
@@ -141,6 +142,7 @@ type StudioLayoutProps = {
   onImportMedia: () => void;
   onImportPaths: (paths: string[], source: ImportSource) => void;
   onRender: () => void;
+  onRenderFromTopBar?: () => void;
   onRemoveJob: (jobId: string) => void;
   onCancelJob: (jobId: string) => void;
   backgroundTaskSummary: string;
@@ -265,6 +267,7 @@ export default function StudioLayout(props: StudioLayoutProps) {
     commandPreview,
     commandPreviewNote,
     logLines,
+    onClearLogs,
     bottomTab,
     settingsOpen,
     seekTime,
@@ -305,6 +308,7 @@ export default function StudioLayout(props: StudioLayoutProps) {
     onImportMedia,
     onImportPaths,
     onRender,
+    onRenderFromTopBar,
     onRemoveJob,
     onCancelJob,
     backgroundTaskSummary,
@@ -420,7 +424,7 @@ export default function StudioLayout(props: StudioLayoutProps) {
         isDirty={isDirty}
         saveStatus={saveStatus}
         onAddMedia={onImportMedia}
-        onStartQueue={onRender}
+        onStartQueue={onRenderFromTopBar ?? onRender}
         onOpenSettings={onOpenSettings}
         renderLabel="Render"
         taskSummary={backgroundTaskSummary}
@@ -611,6 +615,7 @@ export default function StudioLayout(props: StudioLayoutProps) {
         commandPreview={commandPreview}
         commandPreviewNote={commandPreviewNote}
         logLines={logLines}
+        onClearLogs={onClearLogs}
       />
 
       <SettingsPanel

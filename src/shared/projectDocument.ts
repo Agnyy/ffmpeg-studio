@@ -24,6 +24,8 @@ export type ExportSettings = {
   exportPreset: string;
   exportAudioBitrate?: string;
   renderRange?: RenderRange;
+  /** When set, composition render writes here instead of next to source footage. */
+  exportOutputDir?: string;
 };
 
 export const DEFAULT_EXPORT_SETTINGS: ExportSettings = {

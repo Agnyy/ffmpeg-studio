@@ -11,5 +11,13 @@ coverage/
 .DS_Store
 Thumbs.db
 
+# Bundled FFmpeg binaries (prepared by scripts/prepare-ffmpeg-bin.mjs before packaging)
+resources/bin/*.exe
+resources/bin/ffmpeg
+resources/bin/ffprobe
+
 # Editor / AI assistant local config
 .cursor/
+
+# Local/generated release notes
+docs/releases/

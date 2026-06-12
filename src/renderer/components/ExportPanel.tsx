@@ -38,8 +38,8 @@ export default function ExportPanel({
   exportSettings,
   compWidth,
   compHeight,
-  workAreaStart,
-  workAreaEnd,
+  workAreaStart: _workAreaStart,
+  workAreaEnd: _workAreaEnd,
   renderRange,
   resolvedRenderRange,
   outputPath,
@@ -54,6 +54,19 @@ export default function ExportPanel({
   const renderDuration = Math.max(0, resolvedRenderRange.end - resolvedRenderRange.start);
   const exportCrf = exportSettings.exportCrf;
   const exportPreset = exportSettings.exportPreset;
+  const outputFolder = getDirname(outputPath);
+  const outputFile = getBasename(outputPath);
+
+  const handleBrowseOutput = async () => {
+    const folder = await window.ffmpegStudio.chooseOutputFolder();
+    if (folder) {
+      onExportSettingsChange({ exportOutputDir: folder });
+    }
+  };
+
+  const handleOpenOutputFolder = () => {
+    void window.ffmpegStudio.openOutputFolder(outputPath);
+  };
 
   if (!compositionName) {
     return (
@@ -66,13 +79,9 @@ export default function ExportPanel({
   return (
     <div className="export-panel">
       <div className="export-panel-block">
-        <h3 className="export-panel-title">Single Export</h3>
-      </div>
-
-      <div className="export-panel-block">
-        <h3 className="export-panel-subtitle">Composition</h3>
+        <h3 className="export-panel-title">FFmpeg render</h3>
         <div className="export-panel-row">
-          <span className="export-panel-label">Name</span>
+          <span className="export-panel-label">Composition</span>
           <span className="export-panel-value">{compositionName}</span>
         </div>
         <div className="export-panel-row">
@@ -81,16 +90,10 @@ export default function ExportPanel({
             {compWidth}×{compHeight}
           </span>
         </div>
-        {selectedLayer && (
-          <div className="export-panel-row">
-            <span className="export-panel-label">Active Layer</span>
-            <span className="export-panel-value">{selectedLayer.name}</span>
-          </div>
-        )}
       </div>
 
       <div className="export-panel-block">
-        <h3 className="export-panel-title">Render Range</h3>
+        <h3 className="export-panel-subtitle">Render range</h3>
         <div className="field">
           <label htmlFor="export-render-range">Range</label>
           <select
@@ -104,47 +107,54 @@ export default function ExportPanel({
           </select>
         </div>
         <div className="export-panel-row">
-          <span className="export-panel-label">Start</span>
-          <span className="export-panel-value">{formatTimecode(resolvedRenderRange.start)}</span>
-        </div>
-        <div className="export-panel-row">
-          <span className="export-panel-label">End</span>
-          <span className="export-panel-value">{formatTimecode(resolvedRenderRange.end)}</span>
-        </div>
-        <div className="export-panel-row">
           <span className="export-panel-label">Duration</span>
           <span className="export-panel-value export-panel-highlight">
             {formatTimecode(renderDuration)}
           </span>
         </div>
-        <div className="export-panel-row">
-          <span className="export-panel-label">Work Area (B/N)</span>
-          <span className="export-panel-value">
-            {formatTimecode(workAreaStart)} – {formatTimecode(workAreaEnd)}
-          </span>
-        </div>
       </div>
 
       <div className="export-panel-block">
-        <h3 className="export-panel-title">Output</h3>
+        <h3 className="export-panel-subtitle">Output</h3>
         <div className="export-panel-row">
           <span className="export-panel-label">Format</span>
           <span className="export-panel-value">MP4 (H.264)</span>
         </div>
-        <div className="export-panel-row">
-          <span className="export-panel-label">Output folder</span>
-          <span className="export-panel-value export-panel-path">{getDirname(outputPath)}</span>
+        <div className="export-panel-row export-panel-row-stack">
+          <span className="export-panel-label">Folder</span>
+          <span className="export-panel-value export-panel-path" title={outputFolder}>
+            {outputFolder}
+          </span>
         </div>
         <div className="export-panel-row">
-          <span className="export-panel-label">Filename</span>
-          <span className="export-panel-value">{getBasename(outputPath)}</span>
+          <span className="export-panel-label">File</span>
+          <span className="export-panel-value" title={outputPath}>
+            {outputFile}
+          </span>
+        </div>
+        <div className="export-panel-output-actions">
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => void handleBrowseOutput()}
+          >
+            Browse
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={handleOpenOutputFolder}
+            disabled={!outputFolder}
+          >
+            Open folder
+          </button>
         </div>
       </div>
 
       <RenderCompatPanel layers={timelineLayers} />
 
       <div className="export-panel-block">
-        <h3 className="export-panel-title">Encoding</h3>
+        <h3 className="export-panel-subtitle">Encoding</h3>
         <div className="field">
           <label htmlFor="export-crf">Quality (CRF)</label>
           <input
@@ -176,17 +186,15 @@ export default function ExportPanel({
       {selectedLayer?.muted && (
         <div className="export-panel-warning">Audio muted — render excludes audio.</div>
       )}
-      {!selectedLayer?.enabled && selectedLayer && (
-        <div className="export-panel-warning">Selected layer is hidden in timeline.</div>
-      )}
 
       <button
         type="button"
         className="btn btn-primary export-panel-render"
         onClick={onRender}
         disabled={!canRender || isRunning}
+        title="Start FFmpeg render job"
       >
-        {isRunning ? "Rendering…" : "Render Composition"}
+        {isRunning ? "Rendering…" : "Render"}
       </button>
 
       {onBatchApply && (

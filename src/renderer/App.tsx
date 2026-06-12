@@ -1215,7 +1215,8 @@ export default function App() {
       renderRange,
       outputPath: buildCompositionOutputPath(
         activeComposition?.name ?? "Composition",
-        referencePath
+        referencePath,
+        exportSettings.exportOutputDir
       ),
       exportCrf: exportSettings.exportCrf,
       exportPreset: exportSettings.exportPreset,
@@ -3094,7 +3095,7 @@ export default function App() {
         effects: [...(selectedLayer.effects ?? []), { ...effect, collapsed: false }],
       });
       setLeftDockTab("effectControls");
-      showStatus(`${effect.name} added`);
+      showStatus("Filter added. Edit it in Effect Controls.");
     },
     [handleLayerChange, selectedLayer, showStatus]
   );
@@ -3170,7 +3171,7 @@ export default function App() {
       if (result.warnings.length > 0) {
         showStatus(result.warnings[0]);
       } else {
-        showStatus(`Applied preset: ${recipe.title}`);
+        showStatus("Preset applied. Edit in Effect Controls.");
       }
 
       if (result.addedEffects.length > 0) {
@@ -3865,6 +3866,11 @@ export default function App() {
     refreshFfmpegStatus();
   };
 
+  const handleRenderFromTopBar = () => {
+    setRightDockTab("export");
+    void handleRender();
+  };
+
   const handleRemove = (jobId: string) => {
     setJobs((prev) => prev.filter((item) => item.id !== jobId));
     if (selectedJobId === jobId) {
@@ -3891,7 +3897,7 @@ export default function App() {
           void handleAddMedia();
           break;
         case "render":
-          void handleRender();
+          handleRenderFromTopBar();
           break;
         case "exit":
           void handleBeforeClose();
@@ -3926,7 +3932,7 @@ export default function App() {
     handleNewProject,
     handleOpenProject,
     handleRedo,
-    handleRender,
+    handleRenderFromTopBar,
     handleSaveProject,
     handleSaveProjectAs,
     handleUndo,
@@ -4135,6 +4141,7 @@ export default function App() {
       commandPreview={commandPreview}
       commandPreviewNote={commandPreviewNote}
       logLines={logLines}
+      onClearLogs={() => setLogLines([])}
       bottomTab={bottomTab}
       settingsOpen={settingsOpen}
       seekTime={seekTime}
@@ -4192,6 +4199,7 @@ export default function App() {
       onImportMedia={handleAddMedia}
       onImportPaths={(paths, source) => importMediaFiles(paths, source)}
       onRender={handleRender}
+      onRenderFromTopBar={handleRenderFromTopBar}
       onRemoveJob={handleRemove}
       onCancelJob={cancelBackgroundJob}
       backgroundTaskSummary={backgroundTaskSummary}

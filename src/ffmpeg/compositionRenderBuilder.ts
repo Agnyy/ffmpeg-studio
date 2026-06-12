@@ -120,9 +120,10 @@ export function resolveRenderRange(
 
 export function buildCompositionOutputPath(
   compositionName: string,
-  referencePath: string
+  referencePath: string,
+  outputDir?: string | null
 ): string {
-  const dir = getDirname(referencePath);
+  const dir = outputDir?.trim() || getDirname(referencePath);
   const safeName = compositionName.replace(/[<>:"/\\|?*]+/g, "_").trim() || "Composition";
   return joinPath(dir, `${safeName}_render.mp4`);
 }

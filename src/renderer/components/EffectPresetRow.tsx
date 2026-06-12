@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Info, Plus } from "lucide-react";
+import { Info } from "lucide-react";
 import type { CompactBadge } from "./effectPresetRowUtils";
 
 export type EffectPresetRowProps = {
@@ -30,6 +30,12 @@ export default function EffectPresetRow({
   onApply,
   onInfo,
 }: EffectPresetRowProps) {
+  const applyLabel = type === "recipe" ? "Apply" : "Apply";
+  const applyAriaLabel =
+    type === "recipe"
+      ? `Apply preset ${name} to selected layer`
+      : `Apply filter ${name} to selected layer`;
+
   return (
     <div
       className={`effect-preset-row ${disabled ? "effect-preset-row-disabled" : ""} ${
@@ -80,14 +86,15 @@ export default function EffectPresetRow({
         {!disabled && (
           <button
             type="button"
-            className="effect-preset-row-add-btn"
-            aria-label={type === "recipe" ? `Apply ${name}` : `Add ${name}`}
+            className="effect-preset-row-apply-btn"
+            title="Apply to selected layer"
+            aria-label={applyAriaLabel}
             onClick={(event) => {
               event.stopPropagation();
               onApply();
             }}
           >
-            <Plus size={12} />
+            {applyLabel}
           </button>
         )}
       </div>

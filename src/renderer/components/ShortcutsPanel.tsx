@@ -45,7 +45,7 @@ export default function ShortcutsPanel({ open, onClose }: ShortcutsPanelProps) {
                   <tr>
                     <th>Shortcut</th>
                     <th>Action</th>
-                    <th>AE-like</th>
+                    <th>Familiar</th>
                   </tr>
                 </thead>
                 <tbody>

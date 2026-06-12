@@ -69,6 +69,7 @@ export default function TopBar({
           className="btn btn-primary btn-sm"
           onClick={onStartQueue}
           disabled={!canStart || isRunning}
+          title="Render current composition"
         >
           {isRunning ? "Processing…" : renderLabel}
         </button>
